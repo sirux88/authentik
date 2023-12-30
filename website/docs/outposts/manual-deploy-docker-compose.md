@@ -2,7 +2,10 @@
 title: Manual Outpost deployment in docker-compose
 ---
 
-To deploy an outpost with docker-compose, use this snippet in your docker-compose file.
+To deploy an outpost with docker-compose:
+1) Use one of the snippets below in your docker-compose file.
+2) Create an outpost and make sure to set `Service connection` to `---------`.
+3) Click on `View Deployment Info`, copy the token and use it for `AUTHENTIK_TOKEN`.
 
 You can also run the outpost in a separate docker-compose project, you just have to ensure that the outpost container can reach your application container.
 
