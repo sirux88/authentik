@@ -59,7 +59,7 @@ cache:
 #   transport_options: ""
 
 debug: false
-remote_debug: false
+remote_debug: true
 
 log_level: info
 

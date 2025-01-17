@@ -3,7 +3,7 @@
     "configurations": [
         {
             "name": "Python: PDB attach Server",
-            "type": "python",
+            "type": "debugpy",
             "request": "attach",
             "connect": {
                 "host": "localhost",
@@ -11,6 +11,27 @@
             },
             "justMyCode": true,
             "django": true
+        },
+        {
+            "name": "Django",
+            "type": "debugpy",
+            "request": "launch",
+            "stopOnEntry": false,
+            //"pythonPath": "${config.python.pythonPath}",
+            "program": "${workspaceRoot}/manage.py",
+            "args": [
+                "runserver",
+                "--no-color",
+                "--noreload"
+            ],
+            "justMyCode": true,
+
+            "debugOptions": [
+                "WaitOnAbnormalExit",
+                "WaitOnNormalExit",
+                "RedirectOutput",
+                "DjangoDebugging"
+            ]
         },
         {
             "name": "Python: PDB attach Worker",
