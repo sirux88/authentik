@@ -172,6 +172,26 @@ export class UserForm extends ModelForm<User, number> {
                     )}
                 </p>
             </ak-form-element-horizontal>
+            <ak-form-element-horizontal name="forcePasswordChange">
+                <label class="pf-c-switch">
+                    <input
+                        class="pf-c-switch__input"
+                        type="checkbox"
+                        ?checked=${first(this.instance?.forcePasswordChange, false)}
+                    />
+                    <span class="pf-c-switch__toggle">
+                        <span class="pf-c-switch__toggle-icon">
+                            <i class="fas fa-check" aria-hidden="true"></i>
+                        </span>
+                    </span>
+                    <span class="pf-c-switch__label">${msg("Force password change")}</span>
+                </label>
+                <p class="pf-c-form__helper-text">
+                    ${msg(
+                        "Forces this user to change the password upon next login.",
+                    )}
+                </p>
+            </ak-form-element-horizontal>
             <ak-form-element-horizontal label=${msg("Path")} ?required=${true} name="path">
                 <input
                     type="text"

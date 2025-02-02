@@ -54,6 +54,15 @@ entries:
             "username": ldap.get("sAMAccountName"),
         }
   - identifiers:
+      managed: goauthentik.io/sources/ldap/ms-pwdLastSet
+    model: authentik_sources_ldap.ldapsourcepropertymapping
+    attrs:
+      name: "authentik default Active Directory Mapping: pwdLastSet"
+      expression: |
+        return {
+            "force_password_change": ldap.get("pwdLastSet")=="0",
+        }
+  - identifiers:
       managed: goauthentik.io/sources/ldap/ms-userprincipalname
     model: authentik_sources_ldap.ldapsourcepropertymapping
     attrs:

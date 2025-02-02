@@ -94,6 +94,11 @@ class PasswordChallengeResponse(ChallengeResponse):
         # Get the pending user's username, which is used as
         # an Identifier by most authentication backends
         pending_user: User = executor.plan.context[PLAN_CONTEXT_PENDING_USER]
+
+        if pending_user.force_password_change:
+            self.stage.logger.info("Force password change is set. Can't login")
+            # raise ValidationError(_("Force password change is set. Can't login"), "invalid")
+
         auth_kwargs = {
             "password": password,
             "username": pending_user.username,

@@ -270,6 +270,8 @@ class User(SerializerModel, GuardianUserMixin, AttributesMixin, AbstractUser):
     ak_groups = models.ManyToManyField("Group", related_name="users")
     password_change_date = models.DateTimeField(auto_now_add=True)
 
+    force_password_change=models.BooleanField(default=False, help_text=_("Force user to change the password"))
+
     objects = UserManager()
 
     class Meta:

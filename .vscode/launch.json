@@ -2,15 +2,61 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "Connect to server",
+            "type": "go",
+            "request": "attach",
+            "mode": "remote",
+            "remotePath": "${workspaceFolder}",
+            "port": 9900,
+            "host": "127.0.0.1"
+        },
+
+        {
+            "name": "Python Debugger: Django",
+            "type": "debugpy",
+            "request": "launch",
+            "args": [
+                "runserver"
+            ],
+            "django": true,
+            "autoStartBrowser": false,
+            "program": "${workspaceFolder}/manage.py"
+        },
+        {
+            "name": "Attach (Remote Django App)",
+            "type": "debugpy",
+            "request": "attach",
+            "django": true,
+
+            "connect": {
+               "host": "127.0.0.1",
+               "port": 5678
+            },
+        },
+
+        {
+            "name": "Attach to Process",
+            "type": "go",
+            "request": "attach",
+            "mode": "local",
+        },
+        {
+            "name": "Launch file",
+            "type": "go",
+            "request": "launch",
+            "mode": "debug",
+            "program": "cmd/server/server.go"
+        },
+        {
             "name": "Python: PDB attach Server",
-            "type": "python",
+            "type": "debugpy",
             "request": "attach",
             "connect": {
                 "host": "localhost",
                 "port": 6800
             },
             "justMyCode": true,
-            "django": true
+            "django": true,
         },
         {
             "name": "Python: PDB attach Worker",
@@ -22,6 +68,6 @@
             },
             "justMyCode": true,
             "django": true
-        }
+        },
     ]
 }

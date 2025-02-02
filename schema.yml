@@ -5281,6 +5281,10 @@ paths:
         schema:
           type: string
       - in: query
+        name: force_password_change
+        schema:
+          type: boolean
+      - in: query
         name: groups_by_name
         schema:
           type: array
@@ -51154,6 +51158,9 @@ components:
           title: Active
           description: Designates whether this user should be treated as active. Unselect
             this instead of deleting accounts.
+        force_password_change:
+          type: boolean
+          description: Force user to change the password
         last_login:
           type: string
           format: date-time
@@ -55876,6 +55883,9 @@ components:
           title: Active
           description: Designates whether this user should be treated as active. Unselect
             this instead of deleting accounts.
+        force_password_change:
+          type: boolean
+          description: Force user to change the password
         last_login:
           type: string
           format: date-time
@@ -56548,6 +56558,9 @@ components:
           title: Active
           description: Designates whether this user should be treated as active. Unselect
             this instead of deleting accounts.
+        force_password_change:
+          type: boolean
+          description: Force user to change the password
         last_login:
           type: string
           format: date-time
@@ -56642,6 +56655,9 @@ components:
           title: Active
           description: Designates whether this user should be treated as active. Unselect
             this instead of deleting accounts.
+        force_password_change:
+          type: boolean
+          description: Force user to change the password
         is_superuser:
           type: boolean
           readOnly: true
