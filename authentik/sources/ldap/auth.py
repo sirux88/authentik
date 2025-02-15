@@ -7,6 +7,7 @@ from structlog.stdlib import get_logger
 from authentik.core.auth import InbuiltBackend
 from authentik.core.models import User
 from authentik.sources.ldap.models import LDAP_DISTINGUISHED_NAME, LDAPSource
+from authentik.stages.password.stage import PasswordMustChangeException
 
 LOGGER = get_logger()
 
@@ -67,7 +68,13 @@ class LDAPBackend(InbuiltBackend):
             )
             return user
         except LDAPInvalidCredentialsResult as exc:
-            LOGGER.debug("invalid LDAP credentials", user=user, exc=exc)
+            match exc.message.split(",")[2].strip():
+                # according to https://learn.microsoft.com/en-us/windows/win32/debug/system-error-codes--1700-3999- code 0x773 is "ERROR_PASSWORD_MUST_CHANGE"
+                case "data 773":
+                    LOGGER.debug("LDAP password must change", user=user, exc=exc)
+                    raise PasswordMustChangeException
+                case _:
+                    LOGGER.debug("invalid LDAP credentials", user=user, exc=exc)
         except LDAPException as exc:
             LOGGER.warning("failed to bind to LDAP", exc=exc)
         return None

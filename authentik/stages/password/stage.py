@@ -68,6 +68,9 @@ def authenticate(
         stage=stage,
     )
 
+class PasswordMustChangeException(Exception):
+    """This exception is thrown if a backend forces a password change"""
+
 
 class PasswordChallenge(WithUserInfoChallenge):
     """Password challenge UI fields"""
@@ -120,6 +123,9 @@ class PasswordChallengeResponse(ChallengeResponse):
             # (most likely LDAP)
             self.stage.logger.debug("Validation error from signal", exc=exc, **auth_kwargs)
             raise StageInvalidException("Validation error") from exc
+        except PasswordMustChangeException as exc:
+            self.stage.logger.info("Password must change")
+            raise ValidationError(_("Password must change"), "invalid")
         if not user:
             # No user was found -> invalid credentials
             self.stage.logger.info("Invalid credentials")
