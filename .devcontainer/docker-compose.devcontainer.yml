@@ -1,0 +1,14 @@
+services:
+    # Replace `server` with `worker` to debug the worker container.
+    server:
+#      user: root
+      build:
+        context: ./
+        dockerfile: Dockerfile
+      healthcheck:
+        disable: true
+      environment:
+#        AUTHENTIK_DEBUGGER: "true"
+        AUTHENTIK_LOG_LEVEL: "debug"
+      ports:
+        - 9901:9901
